@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-1 pull-left">
+        <a href="javascript:void(0);" ng-click="faves.toggleFave(model)">
+            <img ng-if="faves.isFave(model)" src="images/fave-on.png?v=1">
+            <img ng-if="!faves.isFave(model)" src="images/fave-off.png">
+        </a>
+    </div>
+    <div class="col-md-4 pull-left">
+        <div class="fave-title" ng-repeat="t in model.title">{{t|tct_translate}}</div>
+    </div>
+
+    <div class="col-md-1 pull-right">
+        <a href="#/map?key={{model.key}}">
+            <img src="images/gmaps.png">
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 tracker-container">
+        <table class="departure-table" border="0" cellpadding="0" cellspacing="0" ng-repeat="group in departures">
+            <tr>
+                <td colspan="4" class="table-spacer"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    {{group[0].Route|tct_translate}} {{group[0].RouteDirection|tct_translate}} {{group[0].Description}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="table-spacer"></td>
+            </tr>
+            <tr ng-repeat="dep in group" class='departure isactual-{{dep.Actual}}'>
+                <td class='route'>{{dep.Route}}{{dep.Terminal}}</td>
+                <td class='time'>{{dep.DepartureText}}</td>
+                <td style="width:100%;padding:0">
+                    <div class="trackbar-container">
+                        <img class="trackbar" src="images/horizontal-gradient.png" ng-style="{width:dep.Percent.toString() + '%', background_color:getColor(dep.Percent)}" alt="">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 clock-container">
+        <tct-clock></tct-clock>
+    </div>
+
+    <div class="col-md-7">
+        <tct-countdown></tct-countdown>
+    </div>
+</div>

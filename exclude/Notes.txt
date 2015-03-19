@@ -1,0 +1,5 @@
+Need a way to link stop numbers to stop values.
+
+Default to the user's location when opening a map. Implement a location changed event.
+
+

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html ng-app="transit">
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/lawnchair-0.6.1.min.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/gryst.min.js"></script>
+    <script src="src/bindinglist.js"></script>
+    <script src="src/common.js"></script>
+    <script src="src/faves.js"></script>
+    <script src="src/webservice.js"></script>
+    <script src="src/modules.js"></script>
+    <script src="src/directives.js"></script>
+    <script src="src/gmap.js"></script>
+    <script src="src/svgpaths.js"></script>
+    <script src="exclude/mockSvc.js"></script>
+
+    <!--<script src="scripts/tct.min.js"></script>-->
+    <link href="styles/bootstrap.min.css?v=1" rel="stylesheet">
+    <link href="styles/bootstrap-theme.min.css?v=2" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <title>Twin Cities Transit</title>
+</head>
+<body>
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#/home" class="navbar-brand">Twin Cities Transit</a>
+        </div>
+        <div class="navbar-collapse collapse" ng-controller="common">
+            <ul class="nav navbar-nav" data-toggle="collapse" data-target=".navbar-collapse">
+                <li>
+                    <a href="#/home">{{lang.home}}</a>
+                </li>
+                <li>
+                    <a href="#/faves">{{lang.favorites}}</a>
+                </li>
+                <li>
+                    <a href="#/{{lang.aboutRoute}}">{{lang.about}}</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" tct-language="">{{lang.alternate}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container body-content" ng-view>
+</div>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+</body>
+</html>

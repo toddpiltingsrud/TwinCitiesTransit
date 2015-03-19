@@ -1,0 +1,8 @@
+<div class="col-md-10">
+    <h4>{{lang.favorites}}</h4>
+    <div class="faves-container" aria-label="Favorites">
+        <a ng-repeat="f in list" class="btn btn-default" role="button" href="#/{{f.path}}?key={{f.key}}">
+            <span ng-repeat="t in f.title">{{t|tct_translate}}</span>
+        </a>
+    </div>
+</div>

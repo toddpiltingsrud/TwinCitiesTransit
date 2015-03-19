@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="ftp.piltingsrud.com" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;*.bat;*.txt">
+    <serverData>
+      <paths name="ftp.piltingsrud.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/public_html/worldcitizenapps/twincitiestransit" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/exclude" />
+            <excludedPath local="true" path="$PROJECT_DIR$/spec" />
+            <excludedPath local="true" path="$PROJECT_DIR$/src" />
+            <excludedPath local="true" path="$PROJECT_DIR$/test.html" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

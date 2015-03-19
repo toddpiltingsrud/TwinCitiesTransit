@@ -1,0 +1,30 @@
+<table class="departure-table" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="2" style="text-align: center">
+            <a href="javascript:void(0);" ng-click="faves.toggleFave(model)">
+                <img ng-if="faves.isFave(model)" src="images/fave-on.png?v=1"/>
+                <img ng-if="!faves.isFave(model)" src="images/fave-off.png"/>
+            </a>
+        </td>
+        <td style="width:100%;white-space: normal">
+            <div ng-repeat="t in model.title">{{t|tct_translate}}</div>
+        </td>
+        <td>
+            <a href="#/map?key={{model.key}}">
+                <img src="images/gmaps.png" alt="Map"/>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="table-spacer"></td>
+    </tr>
+    <tr ng-repeat="dep in departures" class='departure isactual-{{dep.Actual}}'>
+        <td class='route'>{{dep.Route}}{{dep.Terminal}}</td>
+        <td class='time'>{{dep.DepartureText}}</td>
+        <td colspan="2" style="width:100%;padding:0">
+            <div class="trackbar-container">
+                <img class="trackbar" src="images/gradient.png" ng-style="{width:dep.Percent.toString() + '%', background_color:getColor(dep.Percent)}" alt="">
+            </div>
+        </td>
+    </tr>
+</table>
