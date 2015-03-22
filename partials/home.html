@@ -1,33 +1,35 @@
-<div class="col-md-10 home">
+<div class="row">
+    <div class="col-md-6 home">
 
-    <select class="form-control"
-            ng-model="model.route"
-            ng-options="route as route.Description for route in routes">
-        <option value="">{{lang.selectRoute}}</option>
-    </select>
+        <select class="form-control"
+                ng-model="model.route"
+                ng-options="route as route.Description for route in routes">
+            <option value="">{{lang.selectRoute}}</option>
+        </select>
 
-    <select class="form-control"
-            ng-model="model.direction"
-            ng-options="direction as direction.Text|tct_translate for direction in directions">
-        <option value="">{{lang.selectDirection}}</option>
-    </select>
+        <select class="form-control"
+                ng-model="model.direction"
+                ng-options="direction as direction.Text|tct_translate for direction in directions">
+            <option value="">{{lang.selectDirection}}</option>
+        </select>
 
-    <select class="form-control"
-            ng-model="model.stop"
-            ng-options="stop as stop.Text for stop in stops">
-        <option value="">{{lang.selectStop}}</option>
-    </select>
+        <select class="form-control"
+                ng-model="model.stop"
+                ng-options="stop as stop.Text for stop in stops">
+            <option value="">{{lang.selectStop}}</option>
+        </select>
 
-    <div class="input-group">
-        <input class="form-control"
-               ng-model="model.stopNumber"
-               type="number"
-               placeholder="{{lang.enterStopNumber}}">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button" ng-click="trackStopNumber()">
-                <img src="images/checkmark.png" alt="" class="checkmark" />
-            </button>
-        </span>
+        <div class="input-group">
+            <input class="form-control"
+                   ng-model="model.stopNumber"
+                   type="number"
+                   placeholder="{{lang.enterStopNumber}}">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="trackStopNumber()">
+                    <img src="images/checkmark.png" alt="" class="checkmark" />
+                </button>
+            </span>
+        </div>
+
     </div>
-
 </div>

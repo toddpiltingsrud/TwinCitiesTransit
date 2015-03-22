@@ -57,6 +57,7 @@ tct.Gmap.prototype = {
             map: self.map,
             title: title
         });
+        this.addMarkerClick(marker);
         this.markers.push(marker);
         return this;
     },
@@ -75,8 +76,6 @@ tct.Gmap.prototype = {
         return this;
     },
     addBus: function(lat, lng, title) {
-        var self = this;
-
         var bus = {
             path: tct.svg.bus,
             fillColor: '#000000',
@@ -97,22 +96,24 @@ tct.Gmap.prototype = {
             title: title
         });
 
+        this.addMarkerClick(marker);
+
+        this.buses.push(marker);
+        return this;
+
+    },
+    addMarkerClick: function(marker) {
+        var self = this;
         google.maps.event.addListener(marker, 'click', function() {
             var title = marker.getTitle();
             if (title) {
                 if (self.infoWindow != null) self.infoWindow.close();
-
-
                 self.infoWindow = new google.maps.InfoWindow({
                     content: '<div class="info-window">' + title + '</div>'
                 });
                 self.infoWindow.open(self.map, marker);
             }
         });
-
-        this.buses.push(marker);
-        return this;
-
     },
     clearBuses: function() {
         this.buses.forEach(function (marker) {

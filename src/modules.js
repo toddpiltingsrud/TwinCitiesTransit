@@ -200,37 +200,38 @@ tct.transit = angular.module("transit", ['ngRoute']);
 
     }]);
 
-    t.factory('geoLocate', function () {
+    t.factory('geoLocate', ['$rootScope', function ($rootScope) {
 
-        var positionService = function() {
+        var geoLocateService = function() {
             var self = this;
             var lastLocation = 'lastLocation';
             var store = new Lawnchair({
                 adapter: "dom",
                 name: "transit"
             }, function (store) {});
+            this.locationChanged = 'geoLocate_LocationChanged';
             this.default = {lat: 44.9833, lng: -93.2667}; // Minneapolis
             this.geoLocation = true;
-            this.getCurrent = function(callback) {
+            this.getCurrent = function() {
                 if(navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
                         function(position) {
-                            callback({
+                            $rootScope.$broadcast(self.locationChanged, {
                                 lat:position.coords.latitude,
                                 lng:position.coords.longitude
                             });
-                            self.setLast(position.latitude, position.longitude);
+                            self.setLast(position.coords.latitude, position.coords.longitude);
                         },
                         function() {
                             // user denied
-                            callback(null);
+                            $rootScope.$broadcast(self.locationChanged, null);
                         }
                     );
                 }
-                // Browser doesn't support Geolocation
+                // Browser doesn't support Geo-location
                 else {
                     self.geoLocation = false;
-                    callback(null);
+                    $rootScope.$broadcast(self.locationChanged, null);
                 }
             };
             this.getLast = function(callback) {
@@ -248,16 +249,17 @@ tct.transit = angular.module("transit", ['ngRoute']);
                 var pos = {lat:lat, lng:lng};
                 store.save({key: lastLocation, value: pos});
             };
-            //// retrieve the last known position from storage
-            //this.getLast(function(pos){
-            //    if (pos !== null && common.hasValue(pos.lat) && common.hasValue(pos.lng)) {
-            //        self.default = pos;
-            //    }
-            //});
+            // set the default to the last known position
+            this.getLast(function(pos){
+                if (pos !== null && common.hasValue(pos.lat) && common.hasValue(pos.lng)) {
+                    self.default = pos;
+                    $rootScope.$broadcast(self.locationChanged, pos);
+                }
+            });
         };
 
-        return new positionService();
-    });
+        return new geoLocateService();
+    }]);
 
     t.factory('lang', function () {
 
@@ -574,15 +576,7 @@ tct.transit = angular.module("transit", ['ngRoute']);
 
             var populateMap, map, search = $location.search();
 
-            var gmap = new tct.Gmap(function(){
-                if (geoLocate.geoLocation) {
-                    geoLocate.getCurrent(function(pos){
-                        if (pos !== null) {
-                            gmap.center(pos.lat, pos.lng);
-                        }
-                    });
-                }
-            });
+            var gmap = new tct.Gmap(geoLocate.getCurrent);
 
             var elem = document.getElementById('map-canvas');
 
@@ -641,9 +635,15 @@ tct.transit = angular.module("transit", ['ngRoute']);
                     };
                 }
 
+                var updateLocation = function(evt, position) {
+                    gmap.center(position.lat, position.lng);
+                };
+
                 populateMap();
 
                 timer.start();
+
+                $scope.$on(geoLocate.locationChanged, updateLocation);
 
                 $scope.$on('timerBuzz', populateMap);
 
