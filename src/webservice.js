@@ -3,7 +3,7 @@
     tct.ws = {
         // keep IE from caching web service calls
         v: Math.round(new Date().getTime() / 1000 / 60) - 23708152,
-        url: 'http://svc.metrotransit.org/NexTrip/{0}?v={1}&format=json&callback={2}',
+        url: 'https://svc.metrotransit.org/NexTrip/{0}?v={1}&format=json&callback={2}',
         directions: ['', 'SOUTHBOUND', 'EASTBOUND', 'WESTBOUND', 'NORTHBOUND'],
 
         getJSON: function (url) {
