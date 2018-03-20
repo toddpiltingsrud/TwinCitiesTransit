@@ -1,5 +1,5 @@
 git add .
-git commit -m "Fix https bug"
+git commit -m "Fix geolocate bug"
 git push origin master
 
 pause

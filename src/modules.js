@@ -636,7 +636,9 @@ tct.transit = angular.module("transit", ['ngRoute']);
                 }
 
                 var updateLocation = function(evt, position) {
-                    gmap.center(position.lat, position.lng);
+                    if (position) {
+                        gmap.center(position.lat, position.lng);
+                    }
                 };
 
                 populateMap();
